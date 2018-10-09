@@ -133,4 +133,4 @@ app.post("/register",function(req,res){
  	   req.logout();
  	   res.redirect("/land");
  })
-    app.listen(3000);
+    app.listen(process.env.PORT,process.env.IP);

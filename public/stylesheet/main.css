@@ -7,6 +7,9 @@ th{
 	height: 60px;
 	color:#000;
 }
+td{
+	color:black;
+}
 body{
 
 	
@@ -23,3 +26,173 @@ button:focus{
 	margin:0 auto;
 	align-self:center;
 }
+#comm{
+	padding:25px;
+	border:1px solid #384C61;
+	margin:25px;
+	background:url("http://getwallpapers.com/wallpaper/small-retina/e/8/5/25971.jpg");
+    
+}
+#comm2{
+  background-color:rgb(140,233,100);
+}
+
+#com{
+	animation-name:comment;
+	animation-duration:7s;
+	animation-delay:0s;
+	animation-iteration-count:infinite;
+	animation-timing-function:linear;
+ 
+}
+
+@keyframes comment{
+	0%{
+   
+		font-size:20px;
+		color:green;
+	}
+	40%{
+    transform:translateX(50%);
+    font-size:50px;
+		color:pink;
+	}
+	100%{
+		transform:translateX(90%);
+		color:green;
+	}
+}
+.st{
+ 
+	
+	background:#313E50;
+	margin:0;
+	padding:0;
+	 top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+
+ 
+  
+}
+
+#sub{
+	  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-family: Montserrat;
+  background: #313E50;
+}
+
+.box1{
+  height:180px;
+  width:180px;
+  background:#313E50;
+  display:block;
+  position:relative;
+  padding:30px 20px 10px 30px;
+  border-radius:25px;
+  animation-name:boxe;
+  animation-duration:7s;
+  animation-delay:0s;
+  animation-iteration-count:infinite;
+  animation-timing-function:linear;
+}
+.box2{
+  height:180px;
+  width:180px;
+  background:#313E50;
+  float:left;
+  margin-top:-180px;
+  margin-bottom:100px;
+  margin-right:10px;
+  margin-left:550px;
+  padding:30px 20px 10px 30px; 
+  border-radius:25px;
+  animation-name:boxe;
+  animation-duration:7s;
+  animation-delay:0s;
+  animation-iteration-count:infinite;
+  animation-timing-function:linear;
+}
+.box3{
+  height:180px;
+  width:180px;
+  background:#313E50;
+  margin-top:-180px;
+  margin-bottom:100px;
+  margin-left:82%;
+  margin-right:800px;
+  padding:30px 20px 10px 30px; 
+  border-radius:25px;
+  animation-name:boxe;
+  animation-duration:7s;
+  animation-delay:0;
+  animation-iteration-count:infinite;
+  animation-timing-function:linear;
+ 
+}
+}
+@keyframes boxe{
+  0%{
+
+    
+  }
+   25%{
+    transform:translateX(200px);
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("http://getwallpapers.com/wallpaper/small-retina/f/2/e/200711.jpg");
+  }
+  50%{
+    transform:translateX(400px);
+  }
+  75%{
+    transform:translateX(600px);
+  }
+  100%{
+    transform:translateX(300px);
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("http://getwallpapers.com/wallpaper/full/6/d/5/657511.jpg");
+    
+  }
+}
+
+
+@keyframes boxe{
+  0%{
+   
+     
+  }
+  25%{
+    transform:translateX(200px);
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("http://getwallpapers.com/wallpaper/small-retina/f/2/e/200711.jpg");
+  }
+  50%{
+    transform:translateX(400px);
+  }
+  75%{
+    transform:translateX(600px);
+  }
+  100%{
+    transform:translateX(1150px);
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("http://getwallpapers.com/wallpaper/full/6/d/5/657511.jpg");
+    
+  }
+}
+
+.box1:hover{
+  animation-play-state:paused;
+}
+.box2:hover{
+  animation-play-state:paused;
+}
+.box3:hover{
+  animation-play-state:paused;
+}
+
+#h2{
+	color:#fff;
+}
+

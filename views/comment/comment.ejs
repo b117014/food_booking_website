@@ -1,0 +1,55 @@
+<%include ../partial/header%>
+<div class="st">
+  <h2 id="com">Comments</h2>
+
+
+<div class="thumbnail" id="comm">
+
+<%comment.forEach(function(comments){%>
+<div class="thumbnail" id="comm2" >
+   
+<strong><%=comments.author.username%></strong>
+<div class="pull-right">
+	<p><%=comments.date%></p>
+</div>
+<p><%= comments.text%></p>
+<div class="bt">
+	
+	
+	<form action="/mess/book/comments/<%=comments._id%>?_method=DELETE" method="POST">
+		<% if( current_user && comments.author.username===current_user.username){%>
+		<button  class="btn btn-default">
+		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+	</button>
+	<%} %>
+	</form>
+	
+</div>
+</div>
+<% })%>
+</div>
+<div class="box1">
+  <p>If you have any problem regarding 
+    canteen, please comment ,your feedback
+    is more important for others</p>
+</div>
+<div class="box2">
+  <p>This web site will book your coupan in every week
+     It is better than offline .you can book your coupan not only veg
+    but also non-veg</p>
+</div>
+<div class="box3">
+  <p>In college , they have two mess, which is open 12 hrs morning
+    to night. If you want something extra their will be also             available</p>
+</div>
+<form action="/mess/book/comments" method="POST" id="sub">
+	<h2 id="h2">Comment Box</h2>
+	<div class="form-group">
+		<textarea name="comments[text]" placeholder="text" rows="3" cols="100"></textarea>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary btn-lg">Sumbit!</button>
+	</div>
+</form>
+</div>
+<% include ../partial/footer%>

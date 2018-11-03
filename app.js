@@ -3,17 +3,21 @@ var express       =     require("express"),
     mongoose      =     require("mongoose"),
     Menu          =     require("./models/mess"),
     Menu2         =     require("./models/mess2"),
+    Comment       =     require("./models/comment"),
     User          =     require("./models/user"),
-    middleware     =     require("./middleware/index"),
+    middleware    =     require("./middleware/index"),
+    override      =     require("method-override"),
     passport      =     require("passport"),
     passportlo    =     require("passport-local"),
     passportlomo  =     require("passport-local-mongoose"),
+    dateformat    =     require("dateformat"),
     app           =     express();
 
-   mongoose.connect("mongodb://prabhat:prabhat123@ds121603.mlab.com:21603/mess");
+   mongoose.connect("mongodb://localhost/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
- 
+   app.use(override("_method"));
+   var now = new Date(); 
 
       app.use(require("express-session")({
     	  secret:"this is your booking",
@@ -98,6 +102,50 @@ app.use(function(req,res,next){
     	})
     })
     
+
+//=================
+// Comments
+//================
+
+app.get("/mess/book/comments",function(req,res){
+	Comment.find({},function(err,comment){
+		if(err){
+			console.log(err);
+		}else{
+			
+
+			res.render("comment/comment",{comment:comment})
+		}
+	})
+})
+app.get("/mess/book/new_comments",function(req,res){
+	res.render("comment/new");
+})
+app.post("/mess/book/comments",function(req,res){
+
+	Comment.create(req.body.comments, function(err,comm){
+		   if(err){
+		   	console.log(err);
+		   }else{
+		   	   comm.author.id= req.user.id;
+		   	   comm.author.username=req.user.username;
+		   	   comm.date=dateformat(now,"mmmm dS, yyyy");
+		   	   comm.save();
+		   	res.redirect("/mess/book/comments");
+		   }
+	})
+})
+
+app.delete("/mess/book/comments/:comment_id",function(req,res){
+	 Comment.findByIdAndRemove(req.params.comment_id , function(err,comm){
+	 	   if(err){
+	 	   	console.log(err);
+	 	   }else{
+	 	   	res.redirect("/mess/book/comments");
+	 	   }
+	 })
+})
+
 //==================
 // Authentication
 //==================
@@ -133,4 +181,4 @@ app.post("/register",function(req,res){
  	   req.logout();
  	   res.redirect("/land");
  })
-    app.listen(process.env.PORT,process.env.IP);
+    app.listen(3000);

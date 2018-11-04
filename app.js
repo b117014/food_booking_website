@@ -13,7 +13,7 @@ var express       =     require("express"),
     dateformat    =     require("dateformat"),
     app           =     express();
 
-   mongoose.connect("mongodb://localhost/mess");
+   mongoose.connect("mongodb://mongodb://prabhat:Prabhat@5789@ds121603.mlab.com:21603/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
    app.use(override("_method"));
@@ -181,4 +181,4 @@ app.post("/register",function(req,res){
  	   req.logout();
  	   res.redirect("/land");
  })
-    app.listen(3000);
+    app.listen(process.env.PORT,process.env.IP);

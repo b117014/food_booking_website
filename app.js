@@ -13,7 +13,7 @@ var express       =     require("express"),
     dateformat    =     require("dateformat"),
     app           =     express();
 
-   mongoose.connect("mongodb://mongodb://prabhat:Prabhat@5789@ds121603.mlab.com:21603/mess");
+   mongoose.connect("mongodb://prabhat:Prabhat@5789@ds121603.mlab.com:21603/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
    app.use(override("_method"));

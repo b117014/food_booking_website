@@ -11,12 +11,14 @@ var express       =     require("express"),
     passportlo    =     require("passport-local"),
     passportlomo  =     require("passport-local-mongoose"),
     dateformat    =     require("dateformat"),
+    flash         =     require("connect-flash"),
     app           =     express();
 
-   mongoose.connect("mongodb://prabhat:prabhat123@ds049598.mlab.com:49598/mess_booking");
+   mongoose.connect("mongodb://localhost/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
    app.use(override("_method"));
+   app.use(flash());
    var now = new Date(); 
 
       app.use(require("express-session")({
@@ -37,6 +39,8 @@ var express       =     require("express"),
    
 app.use(function(req,res,next){
     	res.locals.current_user = req.user;
+        res.locals.error = req.flash("err");
+        res.locals.success = req.flash("suc");
     	next();
     })
   app.set("view engine","ejs");
@@ -49,6 +53,7 @@ app.use(function(req,res,next){
     })
     app.get("/mess/book",middleware.isloggedin,function(req,res){
     	  res.render("new");
+          req.flash("suc","Welcome To the mess-1");
     });
     
     app.get("/mess/:id",middleware.isloggedin,function(req,res){
@@ -69,7 +74,9 @@ app.use(function(req,res,next){
     	 	  if(err){
     	 	  	console.log(err);
     	 	  }else{
+                req.flash("suc","Your coupan has booked in mess-1");
     	 	  	res.redirect("/mess/"+menu1._id);
+
     	 	  }
     	 })
     	
@@ -88,6 +95,7 @@ app.use(function(req,res,next){
     		if(err){
     			console.log(err);
     		}else{
+                req.flash("suc","your coupan has been booked in mess-2");
     			res.redirect("/mess2/"+menu2._id);
     		}
     	})
@@ -181,4 +189,4 @@ app.post("/register",function(req,res){
  	   req.logout();
  	   res.redirect("/land");
  })
-    app.listen(process.env.PORT,process.env.IP);
+    app.listen(3000);

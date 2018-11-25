@@ -50,5 +50,17 @@
 					<%}else{%>
 	    <a href="/logout" class="item">Logout</a>
 					<%}%>
+
+  </div>
+  </div>
+      <% if(success && success.length>0){%>
+	<div class="alert alert-success" id="alert" >
+  <strong><%= success%></strong>
 </div>
+	     <%}%>
+	  <% if(error && error.length>0){%>
+	<div class="alert alert-success">
+  <strong><%=error%></strong>
 </div>
+	      <%}%>
+

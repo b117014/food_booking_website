@@ -15,7 +15,7 @@ var express       =     require("express"),
     cookie        =     require("cookie-parser"),
     app           =     express();
 
-   mongoose.connect("mongodb://prabhat:prabat@123@ds049598.mlab.com:49598/mess_booking");
+   mongoose.connect("mongodb://localhost/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
    app.use(override("_method"));

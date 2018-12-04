@@ -38,18 +38,17 @@
      It is better than offline .you can book your coupan not only veg
     but also non-veg</p>
 </div>
-<div class="box3">
-  <p>In college , they have two mess, which is open 12 hrs morning
-    to night. If you want something extra their will be also             available</p>
-</div>
+
 <form action="/mess/book/comments" method="POST" id="sub">
 	<h2 id="h2">Comment Box</h2>
-	<div class="form-group">
-		<textarea name="comments[text]" placeholder="text" rows="3" cols="100"></textarea>
+	<div class="txt">
+
+		<textarea id="wmd-input" class="wmd-input wz-element s-input bar0 processed" name="comments[text]"
+		  placeholder="text" cols="92" rows="3" tabindex="101" data-wz-state="8" data-min-length=""></textarea>
+		
+
 	</div>
-	<div class="form-group">
-		<button class="btn btn-primary btn-lg">Sumbit!</button>
-	</div>
+			<button class="btn btn-primary btn-lg">Sumbit!</button>
 </form>
 </div>
 <% include ../partial/footer%>

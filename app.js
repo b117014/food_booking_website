@@ -12,6 +12,7 @@ var express       =     require("express"),
     passportlomo  =     require("passport-local-mongoose"),
     dateformat    =     require("dateformat"),
     flash         =     require("connect-flash"),
+    cookie        =     require("cookie-parser"),
     app           =     express();
 
    mongoose.connect("mongodb://localhost/mess");
@@ -19,6 +20,7 @@ var express       =     require("express"),
    app.use(express.static(__dirname+"/public"));
    app.use(override("_method"));
    app.use(flash());
+   app.use(cookie());
    var now = new Date(); 
 
       app.use(require("express-session")({
@@ -52,8 +54,10 @@ app.use(function(req,res,next){
     	res.render("land");
     })
     app.get("/mess/book",middleware.isloggedin,function(req,res){
+        
     	  res.render("new");
-          req.flash("suc","Welcome To the mess-1");
+          
+          
     });
     
     app.get("/mess/:id",middleware.isloggedin,function(req,res){
@@ -87,6 +91,7 @@ app.use(function(req,res,next){
     //==================
 
     app.get("/mess2/book",middleware.isloggedin,function(req,res){
+        
     	res.render("new2");
     })
     app.post("/mess2",function(req,res){
@@ -139,6 +144,7 @@ app.post("/mess/book/comments",function(req,res){
 		   	   comm.author.username=req.user.username;
 		   	   comm.date=dateformat(now,"mmmm dS, yyyy");
 		   	   comm.save();
+               req.flash("suc","Your commented successful");
 		   	res.redirect("/mess/book/comments");
 		   }
 	})
@@ -149,6 +155,7 @@ app.delete("/mess/book/comments/:comment_id",function(req,res){
 	 	   if(err){
 	 	   	console.log(err);
 	 	   }else{
+            req.flash("suc","Your message has been deleted");
 	 	   	res.redirect("/mess/book/comments");
 	 	   }
 	 })

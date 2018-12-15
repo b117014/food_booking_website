@@ -24,6 +24,7 @@ var messschema   =   new mongoose.Schema({
 	                   num19:String,
 	                   num20:String,
 	                   num21:String,
+	                   amount:Number,
 	                    author:{
 	                   	  id:{
 	                   	  	  type:mongoose.Schema.Types.ObjectId,

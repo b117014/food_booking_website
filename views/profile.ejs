@@ -1,0 +1,41 @@
+<% include ./partial/header %>
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+
+
+
+<div class="card">
+  <div class="thum">
+  	<%if(profile.image && profile.image.length>0){%>
+  <a href="#"><img src="<%= profile.image%>"  id="pic" alt="Responsive image"  class="img-circle" ></a>
+    <%}else{%>
+       <form action="/profile/<%=profile._id%>?_method=PUT" method="POST" enctype="multipart/form-data" >
+    	<input type="file" accept="image/*" name="image" id="image" required>
+    	<button>sub</button>
+    </form>
+    <%}%>
+</div>
+  <h2 class="tit"><%=profile.username%></h2>
+  <div class="thumbnail">
+  <table class="dis">
+    
+    <tr>
+      <th >Name  </th><th>:</th><td> <%=profile.fname%> <%=profile.lname%></td>
+   <tr>
+     <tr>
+       <th>Email </th><th>:</th><td><%=profile.email%></td>
+    </tr>
+    <tr>
+      <th>Phone</th><th>:</th><td><%=profile.phone%></td>
+  </tr>
+  
+    </div>
+    </table>
+
+  
+   
+</div>                               
+
+  <%include ./partial/footer%>

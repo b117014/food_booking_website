@@ -5,16 +5,29 @@
 	<title>Mess</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/ type="text/css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheet/profile.css" type="text/css">
 	 <link rel="stylesheet" href="/stylesheet/main.css" type="text/css">
+  
 	 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+   <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="semantic/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/script.js"></script>
 
-
+ 
 </head>
 <body>
 	
@@ -52,24 +65,32 @@
 
 
 
-	<div class='ui inverted menu'>
+	<div class='ui inverted menu' id="nave">
   <a class='item' href="/land">Home</a>
   <a class="item" href="/mess/book">Mess1</a>
   <a class="item" href="/mess2/book">Mess2</a>
   <a class="item" href="/mess/book/comments">Comment</a>
 
   <div class="right menu">
+   
     <%if(!current_user){%>
     
 		<a href="/login" class="item">Login</a>
 	    <a href="/register" class="item">Register</a>
 					<%}else{%>
 	    <a href="/logout" class="item">Logout</a>
+     
+        <a href="/profile/<%=current_user.id%>" class="item"><img src="<%=current_user.image %>"  height="30" width="30" class="img-circle"></a>
+       
+
+       
 					<%}%>
 
   </div>
   </div>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+
       <% if(success && success.length>0){%>
 	<div class="alert alert-success" id="alert" >
   <strong><%= success%></strong>

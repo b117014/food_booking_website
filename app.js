@@ -12,15 +12,18 @@ var express       =     require("express"),
     passportlomo  =     require("passport-local-mongoose"),
     dateformat    =     require("dateformat"),
     flash         =     require("connect-flash"),
-    cookie        =     require("cookie-parser"),
+    
+    multer        =     require("multer"),
+    cloudinary    =     require("cloudinary"),
     app           =     express();
 
-   mongoose.connect("mongodb://prabhat:prabhat123@ds049598.mlab.com:49598/mess_booking");
+   mongoose.connect("mongodb://localhost/mess");
    app.use(bodyparser.urlencoded({extended:true}));
    app.use(express.static(__dirname+"/public"));
+   app.use(express.static(__dirname+"/jQuery"));
    app.use(override("_method"));
    app.use(flash());
-   app.use(cookie());
+ 
    var now = new Date(); 
 
       app.use(require("express-session")({
@@ -46,6 +49,36 @@ app.use(function(req,res,next){
     	next();
     })
   app.set("view engine","ejs");
+
+  
+//=============
+  // Image
+  //=============
+
+  var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+    
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+
+cloudinary.config({ 
+  cloud_name: 'tailer', 
+  api_key: '973925748676287', 
+  api_secret:'CVtBqk-dxZ5rexL7ThR1fLnVBQk'
+});
+
+
+
    //====================
    //Mess 1
    //==================== 
@@ -54,7 +87,8 @@ app.use(function(req,res,next){
     	res.render("land");
     })
     app.get("/mess/book",middleware.isloggedin,function(req,res){
-        
+        req.flash("suc","Welcome to the mess-1");
+         console.log("......."+req.file)
     	  res.render("new");
           
           
@@ -175,16 +209,45 @@ app.get("/register",function(req,res){
 })
 
 app.post("/register",function(req,res){
-
+    
+           
 	User.register(new User({username:req.body.username}) , req.body.password , function(err,user){
 		  if(err){
 		  	console.log(err);
+            res.redirect("/land");
 		  }else{
 		  	passport.authenticate("local")(req,res,function(){
 		  		  res.redirect("/land");
 		  	})
 		  }
 	})
+
+});
+
+
+app.put("/profile/:profile_id",upload.single("image"),function(req,res){
+      
+         cloudinary.uploader.upload(req.file.path ,function(result){
+             var hel=result.secure_url;
+              console.log("......."+req.file.path);
+        User.findByIdAndUpdate(req.params.profile_id ,{image:hel},function(err,user){
+               
+          
+                  
+                  if(err){
+                    console.log(err);
+
+                  }else{
+                     
+                      res.redirect('/land');
+     
+                  }
+
+       
+  
+      });
+  });
+
 })
 
  app.post("/login" , passport.authenticate("local",{
@@ -196,4 +259,16 @@ app.post("/register",function(req,res){
  	   req.logout();
  	   res.redirect("/land");
  })
-    app.listen(process.env.PORT,process.env.IP);
+
+  app.get("/profile/:profile_id",function(req,res){
+     User.findById(req.params.profile_id , function(err,profile){
+                      if(err){
+                        console.log(err);
+                      }else{
+                        res.render("profile",{profile:profile});
+                      }
+     })
+  })
+
+
+    app.listen(4000);

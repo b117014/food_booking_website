@@ -1,0 +1,39 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: auto;
+    
+}
+
+.tit {
+   text-align:center;
+    font-size: 50px;
+}
+#pic{
+  width:150px;
+  height:150px;
+  border-radius: 18em;
+  
+}
+
+
+
+
+
+.dis th{
+  padding-left:30px;
+  padding-bottom:30px;
+}
+.dis td{
+  padding-left:50px;
+  padding-bottom:30px;
+}
+
+.thum{
+   width:150px;
+  height:150px;
+  border:1px solid black;
+  border-radius: 18em;;
+  padding-top:auto;
+  margin-left:33%;
+}
